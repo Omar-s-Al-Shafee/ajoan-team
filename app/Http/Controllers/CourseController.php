@@ -43,7 +43,7 @@ class CourseController extends Controller
         'end' => 'required',
         'time' => 'required',
         // 'Target_group'=>'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:222048',
     ]);
 
     $input = $request->all();

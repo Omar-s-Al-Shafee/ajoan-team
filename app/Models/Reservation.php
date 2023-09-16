@@ -15,6 +15,8 @@ class Reservation extends Model
         'name',
         'user_id',
         'course_id',
+        'email', // Add 'email' here
+    'phone', // Add 'phone' here
     ];
 
     public function user()

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,9 +25,10 @@ class HomeController extends Controller
     {
         if (auth()->check()) {
             $role = auth()->user()->role_as;
-
+            
             if ($role == 0) {
-                return view('User.Home');
+                $courses = Course::all();
+            return view('User.Home', compact('courses'));
             } elseif ($role == 1) {
                 return view('Admin.index');
             }

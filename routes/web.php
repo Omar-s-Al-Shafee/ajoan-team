@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\CategoryController;
@@ -9,6 +10,10 @@ use App\Http\Controllers\Admin\CategoryController;
 
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SinglePageController;
+use App\Http\Controllers\ReservationController;
+
 use App\Models\Course;
 
 /*
@@ -26,13 +31,12 @@ use App\Models\Course;
 //     return view('Admin.index');
 // });
 
-Route::get('/', function () {
-    return view('User.Home');
-});
+
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('User.Home');
+Route::get('/', [HomeController::class, 'index'])->name('User.Home');
 //  Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
@@ -46,7 +50,9 @@ Route::middleware(['auth'])->group ( function() {
 } );
 Route::resource('course',CourseController::class);
 
+Auth::routes();
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Categories Index Page
 Route::get('/admin/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -86,3 +92,10 @@ Route::put('/admin/courses/{course}', [CourseController::class, 'update'])->name
 
 // Remove the specified resource from storage
 Route::delete('/admin/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+// Remove the specified resource from storage
+Route::delete('/admin/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+Route::resource('single', SinglePageController::class);
+
+Route::get('/courses/{id}', [SinglePageController::class, 'show'])->name('courses.show');
+Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
